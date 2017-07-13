@@ -59,3 +59,7 @@ class LessonsList extends Component {
 }
 
 ReactDOM.render(<LessonsList />, document.getElementById("root"));
+
+
+console.log(this.props.index + ' - ' + this.props.lesson.title)
+console.log(this.props.index, ' - ', this.props.lesson.title)
