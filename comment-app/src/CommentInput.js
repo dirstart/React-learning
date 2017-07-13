@@ -20,19 +20,26 @@ class CommentInput extends Component {
 		})
 	}
 	handleSubmit() {
-		// 关于下方的这个我想知道，它只是想要判断存在，而不是想要判断bool吗？
-		if (this.props.onSbumit) {
+		// 对象的话，只要不是NULL，转换成bool类型都是true
+		// console.log(typeof this.props.onSubmit);
+		// console.log(this.props.onSubmit == true); //false
+		// console.log(this.props.onSubmit === true); //false
+		// console.log(!!this.props.onSubmit == true); //true
+		// console.log(!!this.props.onSubmit === true); // true
+		if (this.props.onSubmit) {
 			const {
 				username,
 				content
 			} = this.state;
-			this.props.onSbumit({
+			this.props.onSubmit({
 				username,
 				content
 			});
 			this.setState({
 				content: ''
 			});
+		} else {
+			console.log("error");
 		}
 	}
 	render() {
