@@ -1,65 +1,72 @@
 import React, {
-	Component
+  Component
 } from 'react';
 import ReactDOM from 'react-dom';
+class Input extends Component {
+  constructor() {
+    super();
+    this.state = {
+      content: ''
+    }
+  }
+  handleInputChange(event) {
+    this.setState({
+      content: event.target.value
+    }, () => {
+      if (!!this.props.share) {
+        const {
+          content
+        } = this.state;
+        this.props.share({
+          content
+        });
+      } else {
+        console.log("error");
+      }
+    });
 
-const lessons = [{
-	title: 'Lesson 1: title',
-	description: 'Lesson 1: description'
-}, {
-	title: 'Lesson 2: title',
-	description: 'Lesson 2: description'
-}, {
-	title: 'Lesson 3: title',
-	description: 'Lesson 3: description'
-}, {
-	title: 'Lesson 4: title',
-	description: 'Lesson 4: description'
-}, {
-	title: 'Lesson 1: title',
-	description: 'Lesson 1: description'
-}, {
-	title: 'Lesson 2: title',
-	description: 'Lesson 2: description'
-}, {
-	title: 'Lesson 3: title',
-	description: 'Lesson 3: description'
-}, {
-	title: 'Lesson 4: title',
-	description: 'Lesson 4: description'
-}]
-
-class Lesson extends Component {
-	/* TODO */
-	Change() {
-		console.log(this.props.index + ' - ' + this.props.lesson.title);
-	}
-	render() {
-		const {
-			lesson
-		} = this.props;
-		return ( < div onClick = {
-				this.Change.bind(this)
-			} >
-			<h1> {lesson.title}</h1> < p > {
-				lesson.description
-			} < /p> < /div > )
-	}
+  }
+  render() {
+    return (
+      <div>
+        <input type='number' value={this.state.content} onChange={this.handleInputChange.bind(this)} />
+      </div>
+    )
+  }
 }
 
-class LessonsList extends Component {
-	/* TODO */
-	render() {
-		return (<div>
-			{
-				lessons.map((lesson,i)=><Lesson lesson={lesson} key={i} index={i} />)
-			}
-		</div>)
-	}
+class PercentageShower extends Component {
+  static defaultProps = {
+    number_value: ''
+  }
+  render() {
+    return (
+      <div>{this.props.number_value}</div>
+    )
+  }
 }
 
-ReactDOM.render(<LessonsList />, document.getElementById("root"));
+class PercentageApp extends Component {
+  constructor() {
+    super();
+    this.state = {
+      content: ''
+    }
+  }
+  handleShare(number) {
+    console.log(number);
+    this.setState({
+      content: number.content
+    })
+  }
+  render() {
+    return (
+      <div>
+        <Input share={this.handleShare.bind(this)}/>
+        <PercentageShower number_value={this.state.content} />
+      </div>
+    )
+  }
+}
 
-
-console.log(this.props.index + ' - ' + this.props.lesson.title)
-console.log(this.props.index, ' - ', this.props.lesson.title)
+ReactDOM.render(<PercentageApp />, document.getElementById('root'));
