@@ -24,7 +24,6 @@ class Input extends Component {
         console.log("error");
       }
     });
-
   }
   render() {
     return (
@@ -41,7 +40,7 @@ class PercentageShower extends Component {
   }
   render() {
     return (
-      <div>{this.props.number_value}</div>
+      <div>{this.props.number_value}%</div>
     )
   }
 }
@@ -54,7 +53,7 @@ class PercentageApp extends Component {
     }
   }
   handleShare(number) {
-    console.log(number);
+    number.content = (number.content * 100).toFixed(2);
     this.setState({
       content: number.content
     })

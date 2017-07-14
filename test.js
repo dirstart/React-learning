@@ -1,3 +1,3 @@
-var array = ['2', '3', '2', '998', '1000', 'a', 'f', '213', 'f'];
-var s = new Set(array);
-console.log(s);
+var test = 0.1;
+test = (test * 100).toFixed(2);
+console.log(test);
