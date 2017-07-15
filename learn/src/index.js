@@ -1,27 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-class CC extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			flag: true
-		}
+class AutoInput extends React.Component {
+	componentDidMount() {
+		this.input.focus();
 	}
-
-	handleClick() {
-		this.setState({
-			flag: !this.state.flag
-		})
-	}
-
 	render() {
-		const likeText = this.props.likeText || "喜欢";
-		const unlikeText = this.props.unlikeText || "不喜欢";
-		return (<div>
-			<button onClick={this.handleClick.bind(this)}>{this.state.flag?likeText:unlikeText}</button>
-		</div>)
+		return (<input type="text" ref={(input)=>{this.input=input}}/>)
 	}
 }
 
-ReactDOM.render(<CC likeText="oH Ye" unlikeText="oH No"/>, document.getElementById('root'));
+ReactDOM.render(<AutoInput />, document.getElementById('root'));
