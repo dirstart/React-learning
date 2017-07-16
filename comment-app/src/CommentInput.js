@@ -20,12 +20,6 @@ class CommentInput extends Component {
 		})
 	}
 	handleSubmit() {
-		// 对象的话，只要不是NULL，转换成bool类型都是true
-		// console.log(typeof this.props.onSubmit);
-		// console.log(this.props.onSubmit == true); //false
-		// console.log(this.props.onSubmit === true); //false
-		// console.log(!!this.props.onSubmit == true); //true
-		// console.log(!!this.props.onSubmit === true); // true
 		if (this.props.onSubmit) {
 			const {
 				username,

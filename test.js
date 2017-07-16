@@ -1,2 +1,3 @@
-var d = new Date();
-console.log(d.toLocaleTimeString());
+a = '333';
+a = '333333';
+console.log(a);
