@@ -42,7 +42,8 @@ class CommentInput extends React.Component {
 		this._saveUsername(event.target.value);
 	}
 	handleKeyEnter(event) {
-		if (this.props.bindInApp && event.key == 'Enter') {
+		event.stopPropagation();
+		if (this.props.bindInApp && event.key === 'Enter') {
 			this.props.bindInApp({
 				username: this.state.username,
 				content: this.state.content,
