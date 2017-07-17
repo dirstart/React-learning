@@ -41,7 +41,18 @@ class CommentInput extends React.Component {
 	handleUsernameBlur(event) {
 		this._saveUsername(event.target.value);
 	}
-
+	handleKeyEnter(event) {
+		if (this.props.bindInApp && event.key == 'Enter') {
+			this.props.bindInApp({
+				username: this.state.username,
+				content: this.state.content,
+				createdTime: +new Date()
+			});
+			this.setState({
+				content: ''
+			})
+		}
+	}
 	bindInApp() {
 		if (this.props.bindInApp) {
 			this.props.bindInApp({
@@ -56,7 +67,7 @@ class CommentInput extends React.Component {
 	}
 	render() {
 		return (
-			<div className="comment-input">
+			<div onKeyPress={this.handleKeyEnter.bind(this)} className="comment-input">
 				<div className="comment-field">
 					<span className="comment-field-name">用户名:</span>
 					<div className="comment-field-input">
@@ -73,7 +84,8 @@ class CommentInput extends React.Component {
 					</div>
 				</div>
 				<div className="comment-field-button">
-					<button onClick={this.bindInApp.bind(this)}>发布</button>
+					<button onClick={this.bindInApp.bind(this)}
+					>发布</button>
 				</div>
 			</div>)
 	}
