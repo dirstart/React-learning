@@ -22,18 +22,29 @@ class CommentListContainer extends Component {
 		comments: PropTpyes.array,
 		initComments: PropTpyes.func,
 		onDeleteComment: PropTpyes.func
-
 	}
 	componentWillMount() {
 		this._loadComments();
 	}
 	_loadComments() {
 		let comments = localStorage.getItem('comments');
-		comments = comments ? JSON.parse() : [];
-		this.initComments(comments);
+		comments = comments ? JSON.parse(comments) : [];
+		this.props.initComments(comments);
 	}
 
 	handleDeleteComment(index) {
+		const {
+			comments
+		} = this.props;
+		console.log(comments);
+		const newComments = [
+			...comments.slice(0, index),
+			...comments.slice(index + 1)
+		];
+
+		console.log(newComments);
+
+		localStorage.setItem('comments', JSON.stringify(newComments));
 		if (!!this.props.onDeleteComment) {
 			this.props.onDeleteComment(index);
 		}
@@ -44,3 +55,21 @@ class CommentListContainer extends Component {
 		/>)
 	}
 }
+
+const mapStateToProps = (state) => {
+	return {
+		comments: state.comments
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		initComments: (comments) => {
+			dispatch(initComments(comments));
+		},
+		onDeleteComment: (index) => {
+			dispatch(deleteComments(index));
+		}
+	}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(CommentListContainer);

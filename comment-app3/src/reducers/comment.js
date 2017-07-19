@@ -16,10 +16,10 @@ export const addComments = (comment) => {
 		comment
 	}
 }
-export const deleteComments = (commentIndex) => {
+export const deleteComments = (xxindex) => {
 	return {
 		type: DELETE_COMMENTS,
-		commentIndex
+		xxindex
 	}
 }
 

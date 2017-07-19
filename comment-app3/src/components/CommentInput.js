@@ -5,7 +5,7 @@ class CommentInput extends React.Component {
 	static propTypes = {
 		username: PropTypes.any,
 		onSubmit: PropTypes.func,
-		onUserNameInputBlur: PropTypes.func
+		onUsernameInputBlur: PropTypes.func
 	}
 	static defaultProps = {
 		username: ''
@@ -24,8 +24,11 @@ class CommentInput extends React.Component {
 	}
 
 	handleUsernameBlur(event) {
-		if (this.props.onUserNameInputBlur) {
-			this.props.onUserNameInputBlur(event.target.value);
+		if (this.props.onUsernameInputBlur) {
+			this.props.onUsernameInputBlur(event.target.value);
+			console.log("Dump组件:UsernameBlur");
+		} else {
+			console.log("Dump组件：username没有传到值,说明onUsernameInputBlur不存在");
 		}
 	}
 
@@ -51,6 +54,9 @@ class CommentInput extends React.Component {
 			this.setState({
 				content: ''
 			})
+			console.log("Dump组件:onSubmit");
+		} else {
+			console.log("Dump组件:没有传到值");
 		}
 	}
 	render() {
@@ -72,13 +78,10 @@ class CommentInput extends React.Component {
 					</div>
 				</div>
 				<div className="comment-field-button">
-					<button onClick={this.handleSubmit.bind(this)}
-					>发布</button>
+					<button onClick={this.handleSubmit.bind(this)}>发布</button>
 				</div>
 			</div>)
 	}
-
-
 }
 
 export default CommentInput;

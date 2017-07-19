@@ -50,7 +50,7 @@ class Comment extends React.Component {
 				}}></p>
 				<span className="comment-createdtime">{this.state.timeString}</span>
 				<span onClick={this.handleDeleteComment.bind(this)}
-				className="comment-delete">删除</span>
+							className="comment-delete">删除</span>
 			</div>)
 	}
 }
