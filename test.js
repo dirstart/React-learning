@@ -1,3 +1,7 @@
-const a = 1;
-const foo = (b) => a + b;
-console.log(foo(2));
+function test() {
+	return {
+		1: 1
+	}
+}
+
+console.log(test());
