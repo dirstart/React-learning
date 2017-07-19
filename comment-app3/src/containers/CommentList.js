@@ -68,6 +68,7 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(initComments(comments));
 		},
 		onDeleteComment: (index) => {
+			console.log(index);
 			dispatch(deleteComments(index));
 		}
 	}

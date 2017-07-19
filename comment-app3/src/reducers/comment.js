@@ -11,15 +11,19 @@ export const initComments = (comments) => {
 	}
 }
 export const addComments = (comment) => {
-	return {
-		type: ADD_COMMENTS,
-		comment
+		return {
+			type: ADD_COMMENTS,
+			comment
+		}
 	}
-}
-export const deleteComments = (xxindex) => {
+	// !!!!!! 如下写是正确的，但是，为什么我这里的index改成 其他的格式
+	//   比如xxindex，删除的时候就会出现删除一次，commentList复制了一次所有的list，
+	//		但是那样localStorage又是对的，刷新一次符合正常预期
+	//    出错原因未知
+export const deleteComments = (index) => {
 	return {
 		type: DELETE_COMMENTS,
-		xxindex
+		index
 	}
 }
 
