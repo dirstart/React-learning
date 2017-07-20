@@ -19,7 +19,7 @@ class CommentApp extends React.Component {
 
 	_loadComments() {
 		let comments = localStorage.getItem('comments')
-		if (comments) {
+		if (!!comments) {
 			comments = JSON.parse(comments)
 			this.setState({
 				comments
