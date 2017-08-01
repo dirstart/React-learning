@@ -67,7 +67,8 @@ input,button{
 	color: #fff;
 }
 .button-search{
-	width: 90px;
+	width: 80px;
+	margin-left: 10px;
 	border: none;
 	height: 40px;
 	line-height: 40px;
