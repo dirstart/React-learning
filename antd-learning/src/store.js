@@ -1,18 +1,18 @@
-let Redux=require('redux');
+let Redux = require('redux');
 
-const defaultState={
-	data:[]
+const defaultState = {
+	data: []
 }
 
-const SetData=(pre_data)=>{
-	let res_data=[];
-	if(typeof pre_data!=='undefined'){
-		res_data=(pre_data).map((item,i)=>{
-			item.key=i;
+const SetData = (pre_data) => {
+	let res_data = [];
+	if (typeof pre_data !== 'undefined') {
+		res_data = (pre_data).map((item, i) => {
+			item.key = i;
 			return item
 		})
 
-	}else{
+	} else {
 		console.log("请求数据不符合规范");
 	}
 
@@ -20,11 +20,11 @@ const SetData=(pre_data)=>{
 	return res_data;
 }
 
-let reducer = (state=defaultState,action)=>{
-	let newState={};
-	switch(action.type){
+let reducer = (state = defaultState, action) => {
+	let newState = {};
+	switch (action.type) {
 		case "GET_DATA":
-			newState.data=SetData(action.data);
+			newState.data = SetData(action.data);
 			return {
 				data: action.data
 			}
@@ -33,5 +33,7 @@ let reducer = (state=defaultState,action)=>{
 	}
 }
 
-let store=Redux.createStore(reducer);
-export {store};
+let store = Redux.createStore(reducer);
+export {
+	store
+};
