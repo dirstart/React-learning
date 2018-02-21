@@ -1,25 +1,41 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-// import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-class Title extends React.Component {
-  handleClick(e) {
-    console.log(this);
-    console.log(e.target.innerHTML);
-    console.log('click Title');
+
+class Computer extends Component {
+  constructor () {
+    super();
+    this.state = {
+      status: 'off'
+    }
   }
-  render() {
-    return <h1 onClick={this.handleClick.bind(this)}>React 小书</h1>
+  handleClick() {
+  	this.setState({
+  		status: this.state.status === 'off' ? 'on' : 'off'
+  	})
   }
-}
-class Header extends React.Component {
-  render() {
-    return <div>
-      <span>1.</span>
-      <Title />
-    </div>
+  render () {
+    return (
+      <div>
+        <button onClick={this.handleClick.bind(this)}>开关</button>
+        <Screen showContent={this.state.status === 'off' ? '显示器关了' : '显示器亮了'} />
+      </div>
+    )
   }
 }
 
-ReactDOM.render(<Header />, document.getElementById('root'));
+class Screen extends Component {
+  static defaultProps = {
+    showContent: "无内容"
+  }
+  render () {
+    return (
+      <div className='screen'>{this.props.showContent}</div>
+    )
+  }
+}
+
+
+ReactDOM.render(<Computer />, document.getElementById('root'));
+
 registerServiceWorker();
