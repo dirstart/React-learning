@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div class="wrap"></div>
+</body>
+<script type="text/javascript">
+// 公共函数
+const mount = (component, wrap) => {
+
+}
+const StringToDOM = (str) => {
+  const div = document.createElement('div');
+  div.innerHTML = str;
+  return div;
+}
+// 父类提供 setState，子类需要提供  onStateChange, render
+class Component {
+  // 这个是抽象出来的公共类，主要是给子类继承使用的
+  setState(state) {
+    const oldEl = this.el;
+    this.state = state;
+    this._renderDOM();
+    if (this.onStateChange) {
+      this.onStateChange(oldEl, this.el);
+    }
+  }
+  _renderDOM() {
+    this.el = StringToDOM(this.render());
+    // 如果子类拥有 onClick 的话
+    if (this.onClick) {
+      this.el.addEventListener('click', this.onClick.bind(this), false);
+    }
+    return this.el;
+  }
+}
+class LikeButton extends Component {
+  constructor() {
+    super();
+    this.state = { isLiked: false }
+  }
+  render() {
+    return `<button>123</button>`
+  }
+}
+
+const wrap = document.querySelector('.wrap');
+const likeBtn1 = new LikeButton();
+wrap.appendChild(likeBtn1._renderDOM());
+console.log(wrap);
+</script>
+</html>
