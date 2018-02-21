@@ -10,7 +10,11 @@
 <script type="text/javascript">
 // 公共函数
 const mount = (component, wrap) => {
-
+  wrap.appendChild(component._renderDOM());
+  component.onStateChange = (oldEl, newEl) => {
+    wrap.insertBefore(newEl, oldEl);
+    wrap.removeChild(oldEl);
+  }
 }
 const StringToDOM = (str) => {
   const div = document.createElement('div');
@@ -19,6 +23,10 @@ const StringToDOM = (str) => {
 }
 // 父类提供 setState，子类需要提供  onStateChange, render
 class Component {
+  // 这里 props = {} 是默认对象为空
+  constructor(props = {}) {
+    this.props = props;
+  }
   // 这个是抽象出来的公共类，主要是给子类继承使用的
   setState(state) {
     const oldEl = this.el;
@@ -38,18 +46,23 @@ class Component {
   }
 }
 class LikeButton extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = { isLiked: false }
   }
+  onClick() {
+    this.setState({
+      isLiked: !this.state.isLiked
+    })
+  }
   render() {
-    return `<button>123</button>`
+    // console.log('xx');
+    return `<button style="background-color:${this.props.bgColor}">${this.state.isLiked ? '取消点赞' : '点赞'}</button>`
   }
 }
 
 const wrap = document.querySelector('.wrap');
-const likeBtn1 = new LikeButton();
-wrap.appendChild(likeBtn1._renderDOM());
-console.log(wrap);
+const likeBtn1 = new LikeButton({ bgColor: 'red' });
+mount(likeBtn1, wrap);
 </script>
 </html>
