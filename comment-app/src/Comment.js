@@ -5,6 +5,13 @@ export default class Comment extends Component {
 		super();
 	}
 	render() {
-		return <div>Comment</div>
+		return <div>
+			<span>
+				{this.props.comment.username}
+			</span>：
+			<span>
+				{this.props.comment.content}
+			</span>
+		</div>
 	}
 }
