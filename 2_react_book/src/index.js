@@ -9,8 +9,41 @@ const users = [
   { username: 'Lucy', age: 20, gender: 'female' }
 ];
 
-class Index extends Component {
+const Header = () => {
+	this.componentWillUnmount = () => {
+		console.log('1212');
+	}
+	return <span>我是标题</span>
+}
+class Footer extends Component {
+	componentWillUnmount() {
+		console.log('componentWillUnmount');
+	}
 	render() {
+		console.log('render Footer');
+		return <div>test componentWillUnmount</div>
+	}
+}
+
+class Index extends Component {
+	constructor() {
+		super();
+		this.state = {
+			isShow: false
+		}
+		console.log('constructor');
+	}
+	componentWillMount() {
+		console.log('componentWillMount');
+	}
+	componentDidMount() {
+		console.log('componentDidMount');
+	}
+	componentWillUnmount() {
+		console.log('componentWillUnmount');
+	}
+	render() {
+		console.log('render index');
 		return (<div>
 		{
 			// 一个问题
@@ -24,18 +57,13 @@ class Index extends Component {
 				</div>)
 			})
 		}
-		</div>)
+			{this.state.isShow ? <div><Footer/></div> : null}
+			<button onClick={() => this.setState({ isShow: !this.state.isShow })}>
+				是否显示标题
+			</button>
+		</div>);
 	}
 }
-// const userElement = [];
-// for (let user of users) {
-// 	userElement.push(<div>
-// 		<span>姓名：{user.username}</span>
-// 		<span>年龄：{user.age}</span>
-// 		<span>性别：{user.gender}</span>
-// 	</div>)
-// }
-// return <div>{userElement}</div>
 
 ReactDOM.render(<Index />, document.getElementById('root'));
 
