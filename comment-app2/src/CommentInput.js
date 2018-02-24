@@ -39,11 +39,13 @@ export default class CommentInput extends Component {
 	handleSubmit() {
 		const {username, content} = this.state;
 		if (this.props.onSubmit) {
-			this.props.onSubmit({username, content});
+			this.props.onSubmit({username, content,createdTime: +new Date()});
 		}
 		this.setState({
 			content: ''
-		})
+		}, () => {
+			this.textarea.focus()
+		});
 	}
 	handleUserBlur(event) {
 		this._saveUser(event.target.value);

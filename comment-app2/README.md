@@ -1,3 +1,15 @@
 #### `!!{username: "", content: ""}` 返回 `true`，应该单独判断。
 
 #### `value={this.state.xx.trim()}`,虽然react有，但是我们不应该屏蔽空格的输入，所以还是自己写比较好，用户名可以屏蔽，但评论不应该屏蔽
+
+#### 组件内容编写顺序
+* static 开头的类属性 `defaultProps`,`propTypes`
+* constructor
+* getter/setter
+* 生命周期
+* _私有方法
+* 事件监听方法
+* render*开头的方法
+* render()
+
+#### localStorage 只接受字符串

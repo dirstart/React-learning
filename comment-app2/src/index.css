@@ -1,4 +1,4 @@
-body, div, ul, li {
+body, div, ul, li, p {
   margin: 0;
   padding: 0;
 }
@@ -71,4 +71,7 @@ body {
   background-color: #00a3cf;
   color: #fff;
   cursor: pointer;
+}
+.comment-submit:hover {
+  background-color: #f60;
 }
