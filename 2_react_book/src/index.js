@@ -1,48 +1,27 @@
-// 时间挂载
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+import registerServiceWorker from './registerServiceWorker';
 
-class Clock extends Component {
-  constructor() {
-    super();
-    this.state = {
-      date: new Date()
-    }
-  }
-  componentDidMount() {
-    this.timerID = setInterval(() => {
-      this.tick();
-    }, 1000);
-  }
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
-  tick() {
-    this.setState({
-      date: new Date()
-    })
-  }
+class BlackBorderContainer extends Component {
   render() {
     return <div>
-      {this.state.date.toLocaleTimeString()}
+      {this.props.children.map((item, index) => {
+        return <div style={{border: '1px solid #000'}} key={index}>{item}</div>
+      })}
     </div>
   }
 }
-
 class Index extends Component {
-  constructor(){
-    super();
-    this.state = {
-      isShow: true
-    }
-  }
   render() {
     return <div>
-      {this.state.isShow ? <Clock/> : null}
-      <button onClick={
-        () => {this.setState({isShow: !this.state.isShow})}
-      }>是否渲染组件</button>
+      <BlackBorderContainer>
+        <h1>hh</h1>
+        <p>test<span>12</span></p>
+      </BlackBorderContainer>
     </div>
   }
 }
+
 ReactDOM.render(<Index/>, document.getElementById('root'));
+
+registerServiceWorker();

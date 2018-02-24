@@ -38,3 +38,7 @@ this.setState({
 > 因为JS的闭包特性，可能会导致严重的内存泄露
 所以：
 记得在 `componentWillUnmount() {clearInterva(timer)}`
+
+#### 能不用`ref`就不用。
+
+#### dangerouslySetHTML 和 style 属性
