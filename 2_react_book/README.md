@@ -33,3 +33,8 @@ this.setState({
 * * *
 
 #### props 不可变。
+
+#### 组件的挂载和卸载，如果组件本身有定时器。我们在卸载的时候需要记得要把它们清除。
+> 因为JS的闭包特性，可能会导致严重的内存泄露
+所以：
+记得在 `componentWillUnmount() {clearInterva(timer)}`
