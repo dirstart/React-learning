@@ -1,11 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
-class CommentInput extends React.Component {
-	static propTypes = {
-		bindInApp: PropTypes.func
-	}
-
+import React, {Component} from 'react';
+export default class CommentInput extends Component {
 	constructor() {
 		super();
 		this.state = {
@@ -13,87 +7,71 @@ class CommentInput extends React.Component {
 			content: ''
 		}
 	}
-
 	componentWillMount() {
-		this._localUsername();
+		this._loadUser();
 	}
-	_localUsername() {
-		const username = localStorage.getItem('username');
-		if (!!username) {
-			this.setState({
-				username
-			});
+	componentDidMount() {
+		if (this.state.username) {
+			this.textarea.focus();			
+		} else {
+			this.input.focus();
 		}
 	}
-	_saveUsername(username) {
+	_loadUser() {
+		const username = localStorage.getItem('username');
+		if (username && username.length) {
+			this.setState({ username: username });
+		}
+	}
+	_saveUser(username) {
 		localStorage.setItem('username', username);
 	}
-	handleInputChange(event) {
+	handleChangeUser(event) {
 		this.setState({
 			username: event.target.value
 		})
 	}
-	handleTextareaChange(event) {
+	handleChangeContent(event) {
 		this.setState({
 			content: event.target.value
 		})
 	}
-	handleUsernameBlur(event) {
-		this._saveUsername(event.target.value);
-	}
-	handleKeyEnter(event) {
-		event.stopPropagation();
-		if (this.props.bindInApp && event.key === 'Enter') {
-			this.props.bindInApp({
-				username: this.state.username,
-				content: this.state.content,
-				createdTime: +new Date()
-			});
-			this.setState({
-				content: ''
-			})
+	handleSubmit() {
+		const {username, content} = this.state;
+		if (this.props.onSubmit) {
+			this.props.onSubmit({username, content});
 		}
+		this.setState({
+			content: ''
+		})
 	}
-	bindInApp() {
-		if (this.props.bindInApp) {
-			this.props.bindInApp({
-				username: this.state.username,
-				content: this.state.content,
-				createdTime: +new Date()
-			});
-			this.setState({
-				content: ''
-			})
-		}
+	handleUserBlur(event) {
+		this._saveUser(event.target.value);
 	}
 	render() {
-		return (
-			<div onKeyPress={this.handleKeyEnter.bind(this)} className="comment-input">
-				<div className="comment-field">
-					<span className="comment-field-name">用户名:</span>
-					<div className="comment-field-input">
-						<input value={this.state.username} 
-						onBlur={this.handleUsernameBlur.bind(this)}
-						onChange={this.handleInputChange.bind(this)} />
-					</div>
-				</div>
-				<div className="comment-field">
-					<span className="comment-field-name">评论内容:</span>
-					<div className="comment-field-input">
-						<textarea value={this.state.content} ref={(textarea)=>this.textarea=textarea}
-						onChange={this.handleTextareaChange.bind(this)}/>
-					</div>
-				</div>
-				<div className="comment-field-button">
-					<button onClick={this.bindInApp.bind(this)}
-					>发布</button>
-				</div>
-			</div>)
-	}
-
-	componentDidMount() {
-		this.textarea.focus()
+		return <div className="comment-input">
+			<section className="comment-field">
+				<span className="field-label">用户名：</span>
+				<input type="text" className="field-input"
+					ref={(input) => this.input = input}
+					value={this.state.username}
+					onChange={this.handleChangeUser.bind(this)}
+					onBlur={this.handleUserBlur.bind(this)}
+				/>
+			</section>
+			<section className="comment-field">
+				<span className="field-label">评论：</span>
+				<textarea className="field-textarea"
+					ref={(textarea) => this.textarea = textarea}
+					value={this.state.content}
+					onChange={this.handleChangeContent.bind(this)}
+				></textarea>
+			</section>
+			<section className="comment-field-button">
+				<button className="comment-submit"
+					onClick={this.handleSubmit.bind(this)}
+				>发送</button>
+			</section>
+		</div>
 	}
 }
-
-export default CommentInput;

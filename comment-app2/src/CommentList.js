@@ -1,32 +1,16 @@
-import React from 'react';
-import Comment from './Comment';
-import PropTypes from 'prop-types';
+import React, {Component} from 'react';
 
-class CommentList extends React.Component {
-	static propTypes = {
-		comments: PropTypes.array,
-		onDeleteComment: PropTypes.func
-	}
+import Comment from './Comment';
+
+export default class CommentList extends Component {
 	static defaultProps = {
 		comments: []
 	}
-	handleDeleteComment(index) {
-		if (!!this.props.onDeleteComment) {
-			this.props.onDeleteComment(index);
-		}
-	}
 	render() {
-		const {
-			comments
-		} = this.props;
-		return (<div>
-			{comments.map((comment,i)=>{
-				return (<Comment comment={comment} index={i} key={i} 
-					onDeleteComment={this.handleDeleteComment.bind(this)}
-					/>)
+		return <div>
+			{this.props.comments.map((item, index) => {
+				return <Comment key={index} comment={item}/>
 			})}
-		</div>)
+		</div>
 	}
 }
-
-export default CommentList;
