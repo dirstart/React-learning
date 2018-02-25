@@ -38,10 +38,18 @@ export default class CommentApp extends Component {
 		});
 		this._saveComments(JSON.stringify(comments));
 	}
+	handleDelete(index) {
+		const comments = this.state.comments;
+		comments.splice(index, 1);
+		this.setState({comments});
+		this._saveComments(comments);
+	}
 	render() {
 		return <div>
 			<CommentInput onSubmit={this.handleSubmit.bind(this)}/>
-			<CommentList comments={this.state.comments}/>
+			<CommentList comments={this.state.comments}
+				onDelete={this.handleDelete.bind(this)}
+			/>
 		</div>
 	}
 }

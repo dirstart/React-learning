@@ -23,3 +23,8 @@
       :
       `${Math.round(Math.max(duration, 1))}秒前`
 ```
+
+####   `color: transparent;` 这句话的作用和其他的差别？默认是什么？
+
+#### 为什么const定义的数组，可以使用splice进行裁切？
+> https://www.zhihu.com/question/66007508/answer/237227203

@@ -107,3 +107,14 @@ body {
   padding: 5px;
   font-size: 12px;
 }
+.comment-delete {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: transparent;
+  font-size: 12px;
+  cursor: pointer;
+}
+.comment-item:hover .comment-delete {
+  color: #00a3cf;
+}
