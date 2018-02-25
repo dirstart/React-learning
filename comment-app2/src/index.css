@@ -13,9 +13,10 @@ body {
   background-color: #efefef;
 }
 
+/* index-wrap */
 .wrap {
   width: 500px;
-  height: 600px;
+  /*height: 600px;*/
   margin: 100px auto;
   padding: 20px;
   background-color: #B5CEF3;
@@ -23,7 +24,7 @@ body {
   box-shadow: 4px 4px 3px #818588;
   border-radius: 8px;
 }
-
+/* comment-input */
 .comment-input {
   margin-bottom: 10px;
   padding: 20px;
@@ -74,4 +75,35 @@ body {
 }
 .comment-submit:hover {
   background-color: #f60;
+}
+
+/* comment-list */
+.comment-list {
+  border: 1px solid #fff;
+  padding: 25px;
+  background-color: #fff;
+}
+.comment-item {
+  position: relative;
+  display: flex;
+  border-bottom: 1px solid #464505;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  min-height: 50px;
+}
+.comment-user {
+  flex-shrink: 0;
+  color: #00a3cf;
+}
+.comment-content {
+
+}
+.comment-time {
+  /*background-color: #000;*/
+  padding-right: 5px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 5px;
+  font-size: 12px;
 }

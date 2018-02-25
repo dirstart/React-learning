@@ -13,3 +13,13 @@
 * render()
 
 #### localStorage 只接受字符串
+
+#### Math.max
+```
+    const duration = (+Date.now() - comment.createdTime) / 1000
+    this.setState({
+      timeString: duration > 60 ?
+      `${Math.round(duration / 60)}分钟前`
+      :
+      `${Math.round(Math.max(duration, 1))}秒前`
+```

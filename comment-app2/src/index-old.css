@@ -73,6 +73,9 @@ body {
   background: #13c1f1;
 }
 
+
+
+
 /* 评论列表样式 */
 .comment-list {
   background-color: #fff;
@@ -100,6 +103,7 @@ body {
 }
 
 .comment-createdtime {
+  background-color: #000;
   padding-right: 5px;
   position: absolute;
   bottom: 0;
