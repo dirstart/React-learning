@@ -9,3 +9,40 @@ todo-list/src/App.js
 主要还是对 package.json 中依赖的添加。
 
 #### 2.先想办法在 create-react-app 中使用 Less
+
+* npm run eject
+* 在 todo-list/config 中的 webpack.config.dev.js 和 webpack.config.prod.js 都加上
+```
+use: [
+  require.resolve('style-loader'),
+  {
+    loader: require.resolve('css-loader'),
+    options: {
+      importLoaders: 1,
+    },
+  },
+  {
+    loader: require.resolve('postcss-loader'),
+    options: {
+      // Necessary for external CSS imports to work
+      // https://github.com/facebookincubator/create-react-app/issues/2677
+      ident: 'postcss',
+      plugins: () => [
+        require('postcss-flexbugs-fixes'),
+        autoprefixer({
+          browsers: [
+            '>1%',
+            'last 4 versions',
+            'Firefox ESR',
+            'not ie < 9', // React doesn't support IE8 anyway
+          ],
+          flexbox: 'no-2009',
+        }),
+      ],
+    },
+  },
+  {
+    loader: require.resolve('less-loader')
+  }
+],
+```
