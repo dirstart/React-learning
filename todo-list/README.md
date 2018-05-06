@@ -40,7 +40,7 @@ use: [
         }),
       ],
     },
-  },
+  },w
   {
     loader: require.resolve('less-loader')
   }
