@@ -16,10 +16,18 @@ class Comment extends Component {
   }
 }
 class Index extends Component {
+  constructor() {
+    super();
+    this.state = {
+      test: '<h1>come on</h1>'
+    }
+  }
   render() {
     return (<div>
       <Comment comment={{username: 'haha'}}></Comment>
-      <Comment></Comment>      
+      <div dangerouslySetInnerHTML={{__html: this.state.test}}>
+      </div>
+
     </div>)
   }
 }
