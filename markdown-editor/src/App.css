@@ -10,18 +10,22 @@ body {
   background-color: #6969C5;
 }
 
-.preview-wrap,
-.edit-wrap {
-  height: 100%;
+.common-wrap {
   flex: 1;
+  max-width: 50%;
+  border: 1px solid #089e8a;
   overflow-y: scroll;
+}
+.common-box {
+  min-height: 100%;
+  padding: 20px;
+  outline: none;
 }
 
 .edit-wrap {
   background-color: oldlace;
 }
 .edit-box {
-  height: 80%;
   background-color: darkslategrey;
 }
 
@@ -29,7 +33,7 @@ body {
   background-color: rgb(211, 157, 78);
 }
 .preview-box {
-  height: 100%;
+  word-break: break-all;
   background-color: darkkhaki;
 }
 
