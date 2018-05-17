@@ -12,12 +12,15 @@ class App extends Component {
     }
   }
   handleChange(e) {
-    console.log('有东西吗', e.target.innerText);
+    this.setState({
+      previewContent: marked(e.target.innerText, {breaks: true})
+    })
   }
   render() {
+    const {previewContent} = this.state;
     return (<div className="main">
-      <EditBox onChangeContent={this.handleChange}/>
-      <ShowBox/>
+      <EditBox onChangeContent={this.handleChange.bind(this)}/>
+      <ShowBox content={previewContent} />
     </div>)
   }
 }

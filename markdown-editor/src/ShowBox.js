@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
 
 class ShowBox extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        }
-    }
     render() {
-        return (<div>
-            <h1>test</h1>
+        return (<div className="preview-wrap">
+            <p className="preview-box" dangerouslySetInnerHTML={{__html: this.props.content || '欢迎来到我的编辑器'}}></p>
         </div>)
     }
 }
