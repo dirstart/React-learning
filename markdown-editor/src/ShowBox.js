@@ -10,9 +10,9 @@ class ShowBox extends Component {
     }
     render() {
         return (<div className="common-wrap preview-wrap"
-                     ref={this.previewWrap}>
-            <p className="common-box preview-box" dangerouslySetInnerHTML={{__html: this.props.content || '欢迎来到我的编辑器'}}
-               ref={this.previewBox} >
+            ref={this.previewWrap}>
+            <p className="common-box preview-box" dangerouslySetInnerHTML={{ __html: this.props.content || '欢迎来到我的编辑器' }}
+                ref={this.previewBox} >
             </p>
         </div>)
     }

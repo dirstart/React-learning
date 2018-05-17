@@ -23,12 +23,12 @@ class App extends Component {
     this.setScrollValue();
   }
   render() {
-    const {previewContent} = this.state;
+    const { previewContent } = this.state;
     return (<div className="main">
-      <EditBox onChangeContent={this.onContentChange.bind(this)} 
-               ref={editFather => this.editFather = editFather}/>
+      <EditBox onChangeContent={this.onContentChange.bind(this)}
+        ref={editFather => this.editFather = editFather} />
       <ShowBox content={previewContent}
-               ref={previewFather => this.previewFather = previewFather} />
+        ref={previewFather => this.previewFather = previewFather} />
     </div>)
   }
 
@@ -41,14 +41,14 @@ class App extends Component {
   setCurrentIndex(index) {
     this.currentTabIndex = index;
   }
-  
+
   editScroll(e) {
     this.hasContentChange && this.setScrollValue();
   }
 
   onContentChange(e) {
     this.setState({
-      previewContent: marked(e.target.innerText, {breaks: true})
+      previewContent: marked(e.target.innerText, { breaks: true })
     });
     !this.hasContentChange && (this.hasContentChange = true);
   }
