@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
 import marked from 'marked';
+import hljs from 'highlight.js';
 
 import EditBox from './EditBox';
 import ShowBox from './ShowBox';
+
+import './style/common.css';
+
+hljs.configure({
+  tabReplace: '  ',
+  classPrefix: 'hljs-',
+  languages: ['CSS', 'HTML, XML', 'JavaScript', 'PHP', 'Python', 'Stylus', 'TypeScript', 'Markdown']
+});
+
+marked.setOptions({
+  hljs(code) {
+    return hljs.highlightAuto(code).value
+  }
+})
 
 class App extends Component {
   constructor(props) {
@@ -13,7 +28,7 @@ class App extends Component {
     }
 
     this.cacheValue();
-    this.editScroll = this.editScroll.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
   }
   componentDidMount() {
     const clientHeight = document.documentElement.clientHeight;
@@ -23,34 +38,47 @@ class App extends Component {
     this.setScrollValue();
   }
   render() {
-    const { previewContent } = this.state;
+    const { previewContent, aceBoxHeight } = this.state;
+
     return (<div className="main">
       <EditBox onChangeContent={this.onContentChange.bind(this)}
-        ref={editFather => this.editFather = editFather} />
+        ref={editFather => this.editFather = editFather}
+        editMouseOver={this.handleMouseOver.bind(this)}
+        editScroll={this.handleScroll.bind(this)} />
       <ShowBox content={previewContent}
-        ref={previewFather => this.previewFather = previewFather} />
+        ref={previewFather => this.previewFather = previewFather}
+        previewMouseOver={this.handleMouseOver.bind(this)}
+        previewScroll={this.handleScroll.bind(this)} />
     </div>)
   }
 
   cacheValue() {
-    this.currentTabIndex = 1;
+    this.currentTabIndex = 'edit';
     this.hasContentChange = false;
     this.scale = 1;
   }
+  
+  handleScroll() {
+    const previewWrap = this.previewFather.previewWrap.current;
+    const editWrap = this.editFather.editWrap.current;
+    this.hasContentChange && this.setScrollValue();
 
-  setCurrentIndex(index) {
-    this.currentTabIndex = index;
+    if (this.currentTabIndex === 'edit') {
+      previewWrap.scrollTop = editWrap.scrollTop * this.scale;      
+    } else if (this.currentTabIndex === 'preview') {
+      editWrap.scrollTop = previewWrap.scrollTop / this.scale;
+    }
   }
 
-  editScroll(e) {
-    this.hasContentChange && this.setScrollValue();
+  handleMouseOver(str) {
+    this.currentTabIndex = str;
   }
 
   onContentChange(e) {
-    this.setState({
-      previewContent: marked(e.target.innerText, { breaks: true })
-    });
     !this.hasContentChange && (this.hasContentChange = true);
+    this.setState({
+      previewContent: marked(e.target.innerText)
+    });
   }
 
   setScrollValue() {
@@ -63,7 +91,6 @@ class App extends Component {
     const pDiffer = pWrapH - pBoxH;
     const eDiffer = eWrapH - eBoxH;
     this.scale = pDiffer / eDiffer;
-    console.log(this.scale);
     this.hasContentChange = false;
   }
 }

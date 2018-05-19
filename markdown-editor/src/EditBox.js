@@ -9,6 +9,7 @@ class EditBox extends Component {
     render() {
         return (<div className="common-wrap edit-wrap"
             onScroll={this.handleScroll.bind(this)}
+            onMouseOver={this.handleMounseOver.bind(this, 'edit')}
             ref={this.editWrap}>
             <article contentEditable="plaintext-only"
                 onInput={this.props.onChangeContent}
@@ -19,7 +20,15 @@ class EditBox extends Component {
     }
 
     handleScroll() {
-        console.log('子组件的scroll');
+        if (this.props.editScroll) {
+            this.props.editScroll();
+        }
+    }
+
+    handleMounseOver(str) {
+        if (this.props.editMouseOver) {
+            this.props.editMouseOver(str);
+        }
     }
 }
 
