@@ -1,5 +1,8 @@
 import {combineReducers} from 'redux';
+import todos from './todos';
+import visibilityFilter from './visibilityFilter';
 
 export default combineReducers({
-    // 这里是一些被拆分之后的东西
+    todos,
+    visibilityFilter
 });
